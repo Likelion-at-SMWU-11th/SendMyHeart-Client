@@ -1,0 +1,11 @@
+/* mobile: 0~390px */
+@media all and (max-width: 390px){
+  body {
+    background: #EFEFEF;
+  }
+}
+
+/* desktop: 391px~ */
+@media all and (min-width: 391px){
+  
+}
