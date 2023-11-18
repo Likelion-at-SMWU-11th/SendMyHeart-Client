@@ -1,11 +1,46 @@
+body, .container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content-div {
+  flex: 1;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 /* mobile: 0~390px */
 @media all and (max-width: 390px){
   body {
+    width: 100%;
     background: #EFEFEF;
   }
+
+  .container {
+    width: 100%;
+  }
+  
+
 }
 
 /* desktop: 391px~ */
 @media all and (min-width: 391px){
   
+  body {
+    width: 35vw;
+    margin: 0 auto;
+  }
+
+  .content-div {
+    background: #EFEFEF;
+  }
+}
+
+ul {
+  list-style:none;
+  padding-left:0px;
 }

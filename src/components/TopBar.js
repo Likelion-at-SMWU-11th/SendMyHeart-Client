@@ -20,15 +20,14 @@ flex-direction: row;
 align-items: center;
 justify-content: center;
 
-width: 100%;
-position: fixed;
-top: 0;
-
 font-size: 1.4rem;
 font-weight: 500;
 
+width: 100%;
+height: 3.75rem;
 padding: 1rem 0;
 box-sizing: border-box;
+
 `;
 
 export default TopBar;
