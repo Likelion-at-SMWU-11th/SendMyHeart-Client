@@ -8,6 +8,7 @@ const Dropdown = ({onChangeCategory}) => {
   const [isOpen, ref, onClickHandler]=useDropDown(false);
 
   const [title, setTitle]=useState('');
+
   const handleItemClick = (itemText, category) => {
     setTitle(itemText);
     onChangeCategory(category);
@@ -23,7 +24,7 @@ const Dropdown = ({onChangeCategory}) => {
           cursor:'pointer', 
           display: 'flex', 
           justifyContent:'center'}}>
-          {title || 'Dropdown'}
+          {title||'오늘의 안부'}
           &ensp;{isOpen ? <img src={up}/> : <img src={down}/>}
       </div>
       {isOpen && <DropdownItems onItemClick={handleItemClick}/>}
