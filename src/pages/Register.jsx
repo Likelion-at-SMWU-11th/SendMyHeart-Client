@@ -162,7 +162,7 @@ const RegisterPage = () => {
     } else if (!agreedAll) {
       return alert('약관 동의 후 가입 가능합니다.');
     }
-    navigate('/'); //프로필 설정 페이지로 이동
+    navigate('/profile'); //프로필 설정 페이지로 이동
   };
 
   return (
