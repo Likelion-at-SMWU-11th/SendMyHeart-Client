@@ -27,21 +27,33 @@ const Txt = styled.div`
   text-align: left;
 `;
 
-const SignTxt = styled.div`
-  color: #828282;
-  font-size: 15px;
-  font-weight: 600;
-  padding: 1vh 5vw 1vh;
-  text-align: left;
-`;
-
 const SignInput = styled.input`
   height: 45px;
   width: 350px;
-  margin-bottom: 9.52px;
+  //margin-bottom: 1vh;
   border-radius: 5px;
   border-width: 1px;
-  border-color: #828282; //border 색상 아래만 적용 안 됨
+  border-style: solid;
+  border-color: #cecece;
+`;
+
+const Info = styled.div`
+  font-weight: 500;
+  font-size: 12px;
+  align-items: center;
+  text-align: center;
+  margin-left: 20vw;
+  float: left;
+`;
+
+const SetPwd = styled.div`
+  font-weight: 500;
+  font-size: 12px;
+  color: #ffcc70;
+  margin-left: 2vw;
+  float: right;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 const Login = () => {
@@ -78,6 +90,10 @@ const Login = () => {
     }
   };
 
+  const goToPwdResetPage = () => {
+    navigate('/'); //다음 페이지
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
     if (!isEmail) {
@@ -94,26 +110,26 @@ const Login = () => {
       <Txt>
         안녕하세요! <br /> 가입한 이메일로 로그인해 주세요.
       </Txt>
-      <div>
-        <SignTxt>이메일</SignTxt>
-        <SignInput
-          id="email"
-          name="email"
-          value={email}
-          onChange={onChangeEmail}
-          type="email"
-          placeholder="   이메일 입력"
-        />
-        <SignTxt>비밀번호</SignTxt>
-        <SignInput
-          id="password"
-          name="password"
-          value={password}
-          onChange={onChangePassword}
-          placeholder="   비밀번호 입력"
-        />
-        <Button title="로그인" onClick={onSubmit} />
-      </div>
+      <SignInput
+        id="email"
+        name="email"
+        value={email}
+        onChange={onChangeEmail}
+        type="email"
+        placeholder="   이메일 입력"
+      />
+      <SignInput
+        id="password"
+        name="password"
+        value={password}
+        onChange={onChangePassword}
+        placeholder="   비밀번호 입력"
+      />
+      <Button title="로그인" onClick={onSubmit} />
+      <Info>
+        비밀번호를 잊어버리셨나요?{' '}
+        <SetPwd onClick={goToPwdResetPage}>비밀번호 재설정</SetPwd>
+      </Info>
     </Wrapper>
   );
 };
