@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BottomNav, FriendCard, TopBar } from '../components';
 import logo from '../assets/logo.svg';
 import { styled } from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import profile from '../assets/profile.png';
 
 const Send = () => {
+
+  const baseURL='';
+  const [data, setData]=useState([]);
+
+  useEffect(()=>{
+    const fetchData=async ()=>{
+      try {
+        const response=await axios.get(`${baseURL}mypage/receiver/all/`);
+        setData(response.data);
+      } catch(err){
+        console.error('안부친구 데이터 불러오기 실패:',err);
+      }
+    };
+    fetchData();
+  },[]);
+
   return (
     <div className='container'>
       <TopBar>
@@ -14,11 +32,14 @@ const Send = () => {
           <p 
             style={{color:'#000',fontWeight:'500', fontSize:'1.438rem'}}>누구에게 보내는 안부인가요?</p>
           <RowDiv>
-              <FriendCard/>
-              <FriendCard/>
-              <FriendCard/>
-              <FriendCard/>
-              <FriendCard/>
+              {data.map((item,index)=>{
+                <Link to={'/category'} state={{friendName: item.name}} key={index}>
+                  <FriendCard imgSrc={item.image} name={item.name}/>
+                </Link>
+              })}
+              <Link to={'/category'} state={{friendName:'grandma'}}>
+                  <FriendCard imgSrc={profile} name='외할머니'/>
+              </Link>
           </RowDiv>
           <Link to='/' style={{color:'#000'}}>안부친구 추가하기</Link>
       </div>
@@ -41,6 +62,15 @@ const RowDiv=styled.div`
     flex-grow: 0;
     margin-right: 1rem;
     margin-bottom: 1rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  a:hover {
+    cursor: pointer;
   }
 
   
