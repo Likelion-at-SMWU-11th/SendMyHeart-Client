@@ -4,6 +4,7 @@ import ChangeCategory from './pages/ChangeCategory';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Send from './pages/Send';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="send" element={<Send />} />
         <Route path="category" element={<ChangeCategory />} />
         <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />} />
       </Routes>
     </div>
