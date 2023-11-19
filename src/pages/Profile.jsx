@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 //import axios from 'axios';
 
 import logo from '../assets/header.png';
+import profile from '../assets/defaultprofile.png';
+import edit from '../assets/profileedit.png';
 
 const Wrapper = styled.div`
   background-color: #efefef;
@@ -27,8 +29,20 @@ const Txt = styled.div`
   text-align: left;
 `;
 
+const DefaultProfile = styled.img`
+  height: 100px;
+  width: 100px;
+  border-radius: 70%;
+`;
+
+const EditProfile = styled.div`
+  position: absolute;
+  top: 26vh;
+  left: 57vw;
+`;
+
 const SignTxt = styled.div`
-  color: #828282;
+  color: #000000;
   font-size: 15px;
   font-weight: 600;
   padding: 1vh 5vw 1vh;
@@ -48,6 +62,15 @@ const Profile = () => {
   const [username, setUserName] = useState('');
   const [isName, setIsName] = useState(false);
   const navigate = useNavigate();
+
+  /*   프로필 사진 구현 */
+  const [uploadedImage, setUploadedImage] = useState(null);
+
+  const onChangeImage = (e) => {
+    const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
+    setUploadedImage(imageUrl);
+  };
 
   const onChangeName = (event) => {
     const currentName = event.target.value;
@@ -72,6 +95,24 @@ const Profile = () => {
     <Wrapper>
       <Logo src={logo} />
       <Txt>프로필을 설정해주세요.</Txt>
+      {uploadedImage ? (
+        <DefaultProfile src={uploadedImage}></DefaultProfile>
+      ) : (
+        <DefaultProfile src={profile} alt="프로필 없을 때"></DefaultProfile>
+      )}
+      <EditProfile>
+        <label htmlFor="file">
+          <img src={edit} style={{ height: '25px', width: '25px' }} />
+        </label>
+        <input
+          type="file"
+          id="file"
+          accept="image/*"
+          onChange={onChangeImage}
+          style={{ display: 'none' }}
+        />
+      </EditProfile>
+
       <SignTxt>닉네임</SignTxt>
       <SignInput
         id="username"
@@ -81,6 +122,7 @@ const Profile = () => {
         type="text"
         placeholder="   닉네임을 입력해주세요."
       />
+
       <Button title="다음으로" onClick={onSubmit} />
     </Wrapper>
   );
