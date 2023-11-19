@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Send from './pages/Send';
 import Login from './pages/Login';
+import FindAccount from './pages/FindAccount';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="find" element={<FindAccount />} />
       </Routes>
     </div>
   );
