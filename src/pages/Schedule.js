@@ -6,6 +6,8 @@ import { BottomNav } from '../components';
 
 import logo from '../assets/header.png';
 import calender from '../assets/calender_yellow.svg';
+import CalendarComp from './../components/CalendarComp';
+import { Calendar } from 'react-calendar';
 
 const Wrapper = styled.div`
   background-color: #efefef;
@@ -19,6 +21,10 @@ const Wrapper = styled.div`
 const Logo = styled.img`
   width: 390px;
   height: 60px;
+`;
+
+const LayoutCalender = styled.div`
+  padding: 5vh 10vw 3vh;
 `;
 
 const ScheduleImg = styled.img`
@@ -48,7 +54,7 @@ const ScheduleList = styled.div`
   line-height: 41px;
   border-radius: 5px;
   font-weight: 500;
-  margin: 0 auto;
+  margin: 0vh auto 1vh;
 `;
 
 const Date = styled.div`
@@ -89,6 +95,9 @@ const Schedule = () => {
   return (
     <Wrapper>
       <Logo src={logo} />
+      <LayoutCalender>
+        <Calendar />
+      </LayoutCalender>
       <ScheduleTxt>
         <ScheduleImg src={calender} />{' '}
         <ScheduleTitle> 이달의 일정 </ScheduleTitle>
@@ -103,7 +112,6 @@ const Schedule = () => {
       <ScheduleList>
         <Date>10.05 </Date> <Content>할머니 생신</Content>
       </ScheduleList>
-
       <Nav>
         <BottomNav />
       </Nav>
