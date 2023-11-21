@@ -7,7 +7,8 @@ import up from '../assets/uppoly.svg';
 const Dropdown = ({ onChangeCategory }) => {
   const [isOpen, ref, onClickHandler] = useDropDown(false);
 
-  const [title, setTitle] = useState('');
+  const [title, setTitle]=useState('');
+
   const handleItemClick = (itemText, category) => {
     setTitle(itemText);
     onChangeCategory(category);
@@ -19,13 +20,11 @@ const Dropdown = ({ onChangeCategory }) => {
         ref={ref}
         onClick={onClickHandler}
         style={{
-          cursor: 'pointer',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        {title || 'Dropdown'}
-        &ensp;{isOpen ? <img src={up} /> : <img src={down} />}
+          cursor:'pointer', 
+          display: 'flex', 
+          justifyContent:'center'}}>
+          {title||'오늘의 안부'}
+          &ensp;{isOpen ? <img src={up}/> : <img src={down}/>}
       </div>
       {isOpen && <DropdownItems onItemClick={handleItemClick} />}
     </div>

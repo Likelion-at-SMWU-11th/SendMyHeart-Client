@@ -7,8 +7,10 @@ import Send from './pages/Send';
 import Login from './pages/Login';
 import FindAccount from './pages/FindAccount';
 import Schedule from './pages/Schedule';
+import Copy from './pages/Copy';
 
 function App() {
+
   return (
     <div className="App">
       <Routes>
@@ -19,6 +21,9 @@ function App() {
         <Route path="profile" element={<Profile />} />
         <Route path="find" element={<FindAccount />} />
         <Route path="schedule" element={<Schedule />} />
+        <Route path='send' element={<Send/>}/>
+        <Route path='category' element={<ChangeCategory/>}/>
+        <Route path='copy' element={<Copy/>}/>
       </Routes>
     </div>
   );
