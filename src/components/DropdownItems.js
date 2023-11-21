@@ -37,3 +37,4 @@ const DropDownStyle=styled.ul`
 `;
 
 export default DropdownItems;
+export {DropDownStyle}

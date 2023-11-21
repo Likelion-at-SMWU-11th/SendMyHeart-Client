@@ -41,7 +41,7 @@ const Send = () => {
                   <FriendCard imgSrc={profile} name='외할머니'/>
               </Link>
           </RowDiv>
-          <Link to='/' style={{color:'#000'}}>안부친구 추가하기</Link>
+          <Link to='/' style={{color:'#FFCC70'}}>안부친구 추가하기</Link>
       </div>
       <BottomNav/>
     </div>

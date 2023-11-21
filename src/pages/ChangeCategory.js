@@ -11,19 +11,31 @@ const ChangeCategory = () => {
   const friendName=location.state.friendName;
 
   const [category, setCategory]=useState('today'); 
+  const [categoryKR, setCategoryKR]=useState('오늘의 안부');
 
   const baseURL='';
   const [data, setData]=useState([]);
 
-  const handleCategory=(categoryTxt)=>{
-    setCategory(categoryTxt);
+  const handleCategory=(categoryKR, categoryEN)=>{
+    setCategory(categoryEN);
+    setCategoryKR(categoryKR);
   }
+
 
   // GET api
   // re-fetch data when the category changes
   useEffect(()=>{
+
+    const getCategoryFromCopyPage=()=>{
+      setCategory(location.state.category);
+    }
+
     const fetchData=async ()=>{
       try {
+        if(location.state.category!==undefined){
+          getCategoryFromCopyPage();
+          // console.log('CategoryFromCopyPage:', category);
+        }
         const response=await axios.get(`${baseURL}message/${category}/`);
         setData(response.data);
       } catch (err) {
@@ -31,23 +43,24 @@ const ChangeCategory = () => {
       }
     };
 
+    
     fetchData();
   },[category]);
   
   return (
     <div>
       <TopBar>
-        <Dropdown onChangeCategory={handleCategory}/>
+        <Dropdown onChangeCategory={handleCategory} />
       </TopBar>
       <div className='content-div' style={{padding: "2rem 1.25rem"}}>
         {data.map((item, index)=>{
-          <ItemBox key={index} to={'/copy'} state={{friendName:friendName, text:item.description}}>
+          <ItemBox key={index} to={'/copy'} state={{friendName:friendName, category:categoryKR, text:item.description}}>
             {item.isRecommend && <RecommendBox>추천</RecommendBox>}
             {item.description}
           </ItemBox>
         })}
 
-          <ItemBox to={'/copy'} state={{friendName:friendName, text:'날씨가 많이 선선해졌어요.나봐요! 겉옷 꼭 챙겨다니세요~'}}>
+          <ItemBox to={'/copy'} state={{friendName:friendName, category:categoryKR, text:'날씨가 많이 선선해졌어요.나봐요! 겉옷 꼭 챙겨다니세요~'}}>
           날씨가 많이 선선해졌어요.
           나봐요! 
            겉옷 꼭 챙겨다니세요~
