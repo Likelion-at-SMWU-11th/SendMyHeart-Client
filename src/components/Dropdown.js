@@ -4,8 +4,8 @@ import useDropDown from '../hooks/useDropDown';
 import down from '../assets/downpoly.svg';
 import up from '../assets/uppoly.svg';
 
-const Dropdown = ({onChangeCategory}) => {
-  const [isOpen, ref, onClickHandler]=useDropDown(false);
+const Dropdown = ({ onChangeCategory }) => {
+  const [isOpen, ref, onClickHandler] = useDropDown(false);
 
   const [title, setTitle]=useState('');
 
@@ -14,9 +14,8 @@ const Dropdown = ({onChangeCategory}) => {
     onChangeCategory(category);
   };
 
-  
   return (
-    <div style={{width:'100%', textAlign:'center', position:'relative'}}>
+    <div style={{ width: '100%', textAlign: 'center', position: 'relative' }}>
       <div
         ref={ref}
         onClick={onClickHandler}
@@ -27,7 +26,7 @@ const Dropdown = ({onChangeCategory}) => {
           {title||'오늘의 안부'}
           &ensp;{isOpen ? <img src={up}/> : <img src={down}/>}
       </div>
-      {isOpen && <DropdownItems onItemClick={handleItemClick}/>}
+      {isOpen && <DropdownItems onItemClick={handleItemClick} />}
     </div>
   );
 };
