@@ -1,15 +1,15 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import profile from '../assets/profile.png';
+// import profile from '../assets/profile.png';
 
-const FriendCard = () => {
+const FriendCard = ({imgSrc, name}) => {
   return (
     <CardContainer className='card-container'>
       <ImgContainer>
-          <img src={profile} id='blurred'/>
-          <img src={profile} id='unblurred'/>
+          <img src={imgSrc} id='blurred'/>
+          <img src={imgSrc} id='unblurred'/>
       </ImgContainer>
-      <p><strong>외할머니</strong></p>
+      <p><strong>{name}</strong></p>
     </CardContainer>
   );
 };
@@ -44,14 +44,15 @@ const ImgContainer=styled.div`
   height: 70%;
   position: relative;
   overflow: hidden;
-
   
   #blurred {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    mask-image: linear-gradient(#000, transparent);
-    -webkit-mask-image: linear-gradient(#000 65%, transparent);
+    clip-path: ellipse(70% 70% at 50% 100%);
+    mask-image: linear-gradient(#000 30%, transparent);
+    -webkit-mask-image: linear-gradient(#000 30%, transparent);
+
   }
 
   #unblurred {
@@ -62,7 +63,8 @@ const ImgContainer=styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
-    clip-path: circle(38px at center);
+    clip-path: circle(45%);
+    // clip-path: ellipse(47.5% 48% at 50% 50%);
     z-index: 999;
   }
 

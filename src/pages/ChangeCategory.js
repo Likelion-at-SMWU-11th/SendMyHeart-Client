@@ -1,13 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { Dropdown, TopBar } from '../components';
 
 
 const ChangeCategory = () => {
 
-   // eslint-disable-next-line no-unused-vars
-  const [category, setCategory]=useState(''); 
+  const location = useLocation();
+  const friendName=location.state.friendName;
+
+  const [category, setCategory]=useState('today'); 
 
   const baseURL='';
   const [data, setData]=useState([]);
@@ -38,30 +41,18 @@ const ChangeCategory = () => {
       </TopBar>
       <div className='content-div' style={{padding: "2rem 1.25rem"}}>
         {data.map((item, index)=>{
-          <ItemBox key={index}>
+          <ItemBox key={index} to={'/copy'} state={{friendName:friendName, text:item.description}}>
             {item.isRecommend && <RecommendBox>추천</RecommendBox>}
             {item.description}
           </ItemBox>
         })}
 
-        <ItemBox>
-        날씨가 많이 선선해졌어요.
-진짜 가을이 왔나봐요! 
-일교차가 심한데 겉옷 꼭 챙겨다니세요~
-        </ItemBox>
-        <ItemBox>
-        날씨가 많이 선선해졌어요.
-진짜 가을이 왔나봐요! 
-일교차가 심한데 겉옷 꼭 챙겨다니세요~
-        </ItemBox>
-        <ItemBox>
-        날씨가 많이 선선해졌어요.
-진짜 가을이 왔나봐요! 
-  일교차가 심한데 겉옷 꼭 챙겨다니세요~
-일교차가 심한데 겉옷 꼭 챙겨다니세요~
-일교차가 심한데 겉옷 꼭 챙겨다니세요~
-일교차가 심한데 겉옷 꼭 챙겨다니세요~
-        </ItemBox>
+          <ItemBox to={'/copy'} state={{friendName:friendName, text:'날씨가 많이 선선해졌어요.나봐요! 겉옷 꼭 챙겨다니세요~'}}>
+          날씨가 많이 선선해졌어요.
+          나봐요! 
+           겉옷 꼭 챙겨다니세요~
+          </ItemBox>
+        
       </div>
     </div>
   );
@@ -69,7 +60,7 @@ const ChangeCategory = () => {
 
 export default ChangeCategory;
 
-const ItemBox=styled.div`
+const ItemBox=styled(Link)`
 border-radius: 10px;
 background: #FFF;
 box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
@@ -81,6 +72,9 @@ box-sizing: border-box;
 text-align: left;
 
 font-size: 0.9rem;
+
+color: #000;
+text-decoration: none;
 `
 
 const RecommendBox=styled.div`
