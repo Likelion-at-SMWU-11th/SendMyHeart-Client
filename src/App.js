@@ -10,13 +10,12 @@ import FindAccount from './pages/FindAccount';
 import Schedule from './pages/Schedule';
 
 function App() {
-
   return (
     <div className="App">
       <Routes>
-        <Route path='send' element={<Send/>}/>
-        <Route path='category' element={<ChangeCategory/>}/>
-        <Route path='copy' element={<Copy/>}/>
+        <Route path="send" element={<Send />} />
+        <Route path="category" element={<ChangeCategory />} />
+        <Route path="copy" element={<Copy />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />} />
