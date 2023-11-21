@@ -11,7 +11,7 @@ const Dropdown = ({onChangeCategory}) => {
 
   const handleItemClick = (itemText, category) => {
     setTitle(itemText);
-    onChangeCategory(category);
+    onChangeCategory(itemText, category);
   };
 
   
