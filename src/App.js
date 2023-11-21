@@ -6,6 +6,7 @@ import Profile from './pages/Profile';
 import Send from './pages/Send';
 import Login from './pages/Login';
 import FindAccount from './pages/FindAccount';
+import Schedule from './pages/Schedule';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />} />
         <Route path="find" element={<FindAccount />} />
+        <Route path="schedule" element={<Schedule />} />
       </Routes>
     </div>
   );
