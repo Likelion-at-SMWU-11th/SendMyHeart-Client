@@ -8,7 +8,7 @@ import profile from '../assets/profile.png';
 
 const Send = () => {
 
-  const baseURL='';
+  const baseURL='http://127.0.0.1:8000/';
   const [data, setData]=useState([]);
 
   useEffect(()=>{
@@ -32,11 +32,11 @@ const Send = () => {
           <p 
             style={{color:'#000',fontWeight:'500', fontSize:'1.438rem'}}>누구에게 보내는 안부인가요?</p>
           <RowDiv>
-              {data.map((item,index)=>{
-                <Link to={'/category'} state={{friendName: item.name}} key={index}>
-                  <FriendCard imgSrc={item.image} name={item.name}/>
+              {data.map((item,index)=>(
+                <Link to={'/category'} state={{friendName: item.nickname}} key={index}>
+                  <FriendCard imgSrc={item.image} name={item.nickname}/>
                 </Link>
-              })}
+              ))}
               <Link to={'/category'} state={{friendName:'grandma'}}>
                   <FriendCard imgSrc={profile} name='외할머니'/>
               </Link>
