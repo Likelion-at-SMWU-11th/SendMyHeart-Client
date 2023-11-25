@@ -11,47 +11,61 @@ const ChangeCategory = () => {
   const friendName=location.state.friendName;
 
   const [category, setCategory]=useState('today'); 
+  const [categoryKR, setCategoryKR]=useState('오늘의 안부');
 
-  const baseURL='';
+  const baseURL='http://127.0.0.1:8000/';
   const [data, setData]=useState([]);
 
-  const handleCategory=(categoryTxt)=>{
-    setCategory(categoryTxt);
+  const handleCategory=(categoryKR, categoryEN)=>{
+    setCategory(categoryEN);
+    setCategoryKR(categoryKR);
   }
+
 
   // GET api
   // re-fetch data when the category changes
   useEffect(()=>{
+
+    const getCategoryFromCopyPage=()=>{
+      setCategory(location.state.category);
+    }
+
     const fetchData=async ()=>{
       try {
-        const response=await axios.get(`${baseURL}message/${category}/`);
-        setData(response.data);
+        if(location.state.category!==undefined){
+          getCategoryFromCopyPage();
+          // console.log('CategoryFromCopyPage:', category);
+        }
+        const response=await axios.get(`${baseURL}main/message/${category}/`);
+        setData(response.data.messages);
+        console.log(response.data.messages);
       } catch (err) {
         console.error('카테고리별 안부 불러오기 실패:',err);
       }
     };
 
+    
     fetchData();
   },[category]);
   
   return (
     <div>
       <TopBar>
-        <Dropdown onChangeCategory={handleCategory}/>
+        <Dropdown onChangeCategory={handleCategory} />
       </TopBar>
       <div className='content-div' style={{padding: "2rem 1.25rem"}}>
-        {data.map((item, index)=>{
-          <ItemBox key={index} to={'/copy'} state={{friendName:friendName, text:item.description}}>
-            {item.isRecommend && <RecommendBox>추천</RecommendBox>}
-            {item.description}
-          </ItemBox>
-        })}
+      {data.map((item, index) => (
+        <ItemBox key={index} to={'/copy'} state={{ friendName: friendName, category: categoryKR, text: item.content }}>
+          {item.is_recommended && <RecommendBox>추천</RecommendBox>}
+          {item.content}
+        </ItemBox>
+        ))}
 
-          <ItemBox to={'/copy'} state={{friendName:friendName, text:'날씨가 많이 선선해졌어요.나봐요! 겉옷 꼭 챙겨다니세요~'}}>
+          {/* <ItemBox to={'/copy'} state={{friendName:friendName, category:categoryKR, text:'날씨가 많이 선선해졌어요.나봐요! 겉옷 꼭 챙겨다니세요~'}}>
           날씨가 많이 선선해졌어요.
           나봐요! 
            겉옷 꼭 챙겨다니세요~
-          </ItemBox>
+          </ItemBox> */}
         
       </div>
     </div>

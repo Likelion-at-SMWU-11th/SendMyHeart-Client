@@ -10,8 +10,9 @@ const Send = () => {
   const baseURL = 'http://127.0.0.1:8000/';
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
+
+  useEffect(()=>{
+    const fetchData=async ()=>{
       try {
         const response = await axios.get(`${baseURL}mypage/receiver/all/`);
         setData(response.data);
@@ -27,27 +28,20 @@ const Send = () => {
       <TopBar>
         <img src={logo} />
       </TopBar>
-      <div className="content-div">
-        <p style={{ color: '#000', fontWeight: '500', fontSize: '1.438rem' }}>
-          누구에게 보내는 안부인가요?
-        </p>
-        <RowDiv>
-          {data.map((item, index) => {
-            <Link
-              to={'/category'}
-              state={{ friendName: item.nickname }}
-              key={index}
-            >
-              <FriendCard imgSrc={item.image} name={item.nickname} />
-            </Link>;
-          })}
-          <Link to={'/category'} state={{ friendName: 'grandma' }}>
-            <FriendCard imgSrc={profile} name="외할머니" />
-          </Link>
-        </RowDiv>
-        <Link to="/" style={{ color: '#FFCC70' }}>
-          안부친구 추가하기
-        </Link>
+      <div className='content-div'>
+          <p 
+            style={{color:'#000',fontWeight:'500', fontSize:'1.438rem'}}>누구에게 보내는 안부인가요?</p>
+          <RowDiv>
+              {data.map((item,index)=>(
+                <Link to={'/category'} state={{friendName: item.nickname}} key={index}>
+                  <FriendCard imgSrc={item.image} name={item.nickname}/>
+                </Link>
+              ))}
+              <Link to={'/category'} state={{friendName:'grandma'}}>
+                  <FriendCard imgSrc={profile} name='외할머니'/>
+              </Link>
+          </RowDiv>
+          <Link to='/' style={{color:'#FFCC70'}}>안부친구 추가하기</Link>
       </div>
       <BottomNav />
     </div>

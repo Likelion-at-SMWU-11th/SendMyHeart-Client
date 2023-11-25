@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { TopBar, BottomNav, Dropdown } from '../components';
+import { TopBar, BottomNav, DropdownExtended, Dropdown } from '../components';
 import logo from '../assets/logo.svg';
 import { styled } from 'styled-components';
 
@@ -35,7 +35,7 @@ const Copy = () => {
       <div className='content-div' 
         style={{padding: "2.5rem 1.25rem", alignItems:'flex-start'}}>
         <div style={{fontSize:'1.44rem', fontWeight:'500'}}>
-          <Dropdown />
+          <DropdownExtended categoryKR={location.state.category}/>
         </div>
         <TxtDiv id="txtArea">{dataText}</TxtDiv>
         <CopyBtn onClick={handleCopyBtnClick}>복사하기</CopyBtn>
