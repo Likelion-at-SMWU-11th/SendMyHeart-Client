@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './../components/Button';
 import { useNavigate } from 'react-router-dom';
-//import axios from 'axios';
+import axios from 'axios';
 
 import logo from '../assets/header.png';
 
@@ -101,7 +101,38 @@ const Login = () => {
     } else if (!isPassword) {
       return alert('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.');
     }
-    navigate('/'); //메인 페이지로 이동
+
+    let UserInfo = {
+      email: email,
+      password: password,
+    };
+
+    console.log('UserInfo: ', UserInfo);
+
+    axios
+      .post('http://localhost:8000/account/auth/', UserInfo)
+      .then((res) => {
+        console.log(res);
+
+        if (res.data.user.email === undefined) {
+          console.log('=================', res.data.message);
+          alert('입력한 이메일이 일치하지 않습니다.');
+        } else if (res.data.user.email === null) {
+          console.log(
+            '=================',
+            '입력하신 비밀번호가 일치하지 않습니다.'
+          );
+          alert('입력하신 비밀번호가 일치하지 않습니다.');
+        } else if (res.data.user.email === UserInfo.email) {
+          console.log('=================', '로그인 성공');
+        }
+        console.log(UserInfo);
+        navigate(`/send`); //메인 페이지로 이동
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response);
+      });
   };
 
   return (

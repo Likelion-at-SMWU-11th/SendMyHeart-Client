@@ -7,26 +7,26 @@ import axios from 'axios';
 import profile from '../assets/profile.png';
 
 const Send = () => {
+  const baseURL = 'http://127.0.0.1:8000/';
+  const [data, setData] = useState([]);
 
-  const baseURL='http://127.0.0.1:8000/';
-  const [data, setData]=useState([]);
 
   useEffect(()=>{
     const fetchData=async ()=>{
       try {
-        const response=await axios.get(`${baseURL}mypage/receiver/all/`);
+        const response = await axios.get(`${baseURL}mypage/receiver/all/`);
         setData(response.data);
-      } catch(err){
-        console.error('안부친구 데이터 불러오기 실패:',err);
+      } catch (err) {
+        console.error('안부친구 데이터 불러오기 실패:', err);
       }
     };
     fetchData();
-  },[]);
+  }, []);
 
   return (
-    <div className='container'>
+    <div className="container">
       <TopBar>
-        <img src={logo}/>
+        <img src={logo} />
       </TopBar>
       <div className='content-div'>
           <p 
@@ -43,12 +43,12 @@ const Send = () => {
           </RowDiv>
           <Link to='/' style={{color:'#FFCC70'}}>안부친구 추가하기</Link>
       </div>
-      <BottomNav/>
+      <BottomNav />
     </div>
   );
 };
 
-const RowDiv=styled.div`
+const RowDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -72,8 +72,6 @@ const RowDiv=styled.div`
   a:hover {
     cursor: pointer;
   }
-
-  
-`
+`;
 
 export default Send;
