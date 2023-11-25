@@ -8,6 +8,8 @@ import Copy from './pages/Copy';
 import Login from './pages/Login';
 import FindAccount from './pages/FindAccount';
 import Schedule from './pages/Schedule';
+import OnBoarding from './pages/OnBoarding';
+import Splash from './pages/Splash';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="profile" element={<Profile />} />
         <Route path="find" element={<FindAccount />} />
         <Route path="schedule" element={<Schedule />} />
+        <Route path="onboarding" element={<OnBoarding />} />
+        <Route path="/" element={<Splash/>} />
       </Routes>
     </div>
   );
