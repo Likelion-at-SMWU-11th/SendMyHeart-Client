@@ -1,0 +1,34 @@
+{
+  "friends": [
+    {
+      "id": 1,
+      "profile": "https://raw.githubusercontent.com/MinJaeSon/assets/433d6fe9b3bc4449036f816ed0c4cbc731c2f896/profile_round.svg",
+      "name": "외할머니"
+    },
+    {
+      "id": 2,
+      "profile": "https://raw.githubusercontent.com/MinJaeSon/assets/433d6fe9b3bc4449036f816ed0c4cbc731c2f896/profile_round.svg",
+      "name": "외할머니"
+    },
+    {
+      "id": 3,
+      "profile": "https://raw.githubusercontent.com/MinJaeSon/assets/433d6fe9b3bc4449036f816ed0c4cbc731c2f896/profile_round.svg",
+      "name": "외할머니"
+    },
+    {
+      "id": 4,
+      "profile": "https://raw.githubusercontent.com/MinJaeSon/assets/433d6fe9b3bc4449036f816ed0c4cbc731c2f896/profile_round.svg",
+      "name": "외할머니"
+    },
+    {
+      "id": 5,
+      "profile": "https://raw.githubusercontent.com/MinJaeSon/assets/433d6fe9b3bc4449036f816ed0c4cbc731c2f896/profile_round.svg",
+      "name": "외할머니"
+    },
+    {
+      "id": 6,
+      "profile": "https://raw.githubusercontent.com/MinJaeSon/assets/433d6fe9b3bc4449036f816ed0c4cbc731c2f896/profile_round.svg",
+      "name": "외할머니"
+    }
+  ]
+}
