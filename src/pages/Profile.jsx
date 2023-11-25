@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './../components/Button';
-import { useNavigate } from 'react-router-dom';
-//import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 import logo from '../assets/header.png';
 import profile from '../assets/defaultprofile.png';
@@ -62,6 +62,8 @@ const Profile = () => {
   const [username, setUserName] = useState('');
   const [isName, setIsName] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const userInfo = location.state.userInfo;
 
   /*   프로필 사진 구현 */
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -69,7 +71,7 @@ const Profile = () => {
   const onChangeImage = (e) => {
     const file = e.target.files[0];
     const imageUrl = URL.createObjectURL(file);
-    setUploadedImage(imageUrl);
+    setUploadedImage(file);
   };
 
   const onChangeName = (event) => {
@@ -83,12 +85,96 @@ const Profile = () => {
     }
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     if (!isName) {
       return alert('닉네임은 2글자 이상 5글자 이하로 입력해주세요!.');
+    } else if (!uploadedImage) {
+      return alert('프로필을 설정해 주세요.');
     }
-    navigate('/'); //프로필 설정 페이지로 이동
+
+    const formData = new FormData();
+
+    let UserInfo = {
+      email: userInfo.email,
+      password: userInfo.password,
+      phone: userInfo.phone,
+    };
+
+    formData.append('profile_image', uploadedImage);
+    formData.append('username', username);
+
+    // UserInfo의 각 필드를 formData에 추가
+    formData.append('email', UserInfo.email);
+    formData.append('password', UserInfo.password);
+    formData.append('phone', UserInfo.phone);
+
+    console.log('===========타입 확인========');
+    console.log(typeof userInfo.email);
+    console.log(typeof uploadedImage);
+    console.log(typeof username);
+
+    console.log('FormData:', formData);
+
+    console.log('===========키 값========');
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+
+    console.log('===========Value 값========');
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+
+    /*     let UserInfo = {
+      ...userInfo, //기존 userInfo 값 복사
+      username: username,
+      profile_image: uploadedImage,
+    }; 
+
+    console.log(UserInfo);*/
+
+    /*     axios
+      .post('http://localhost:8000/account/signup/', UserInfo)
+      .then((response) => {
+        console.log(response);
+        alert('회원가입 성공!');
+        navigate('/login');
+        console.log(UserInfo);
+      })
+      .catch((err) => {
+        if (!err.response) {
+          console.log(err);
+          console.log(UserInfo);
+        } else {
+          console.log(err);
+          console.log(err.response.data);
+          console.log(UserInfo);
+        }
+      }); */
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/account/signup/',
+        formData
+      );
+
+      console.log(response);
+      alert('회원가입 성공!');
+      navigate('/login');
+    } catch (err) {
+      if (!err.response) {
+        console.log('에러1');
+        console.log(err);
+        console.log(err.response.data);
+        console.log('폼데이터');
+        console.log(formData);
+      } else {
+        console.log('에러2');
+        console.log(err);
+        console.log(err.response.data);
+        console.log(formData);
+      }
+    }
   };
 
   return (
@@ -96,7 +182,7 @@ const Profile = () => {
       <Logo src={logo} />
       <Txt>프로필을 설정해주세요.</Txt>
       {uploadedImage ? (
-        <DefaultProfile src={uploadedImage}></DefaultProfile>
+        <DefaultProfile src={URL.createObjectURL(uploadedImage)} />
       ) : (
         <DefaultProfile src={profile} alt="프로필 없을 때"></DefaultProfile>
       )}
