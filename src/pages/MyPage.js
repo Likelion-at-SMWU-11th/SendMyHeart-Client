@@ -12,6 +12,9 @@ import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
   const navigate = useNavigate();
+  const navigateToCreateFriend = () => {
+    navigate('createfriend');
+  };
   const navigateToFriendsList = () => {
     navigate('friendslist');
   };
@@ -41,7 +44,7 @@ const MyPage = () => {
         <FriendsSection>
           <FriendsHeader>
             <h4>안부친구</h4>
-            <button>전체보기 {`>`}</button>
+            <button onClick={navigateToFriendsList}>전체보기 {`>`}</button>
           </FriendsHeader>
           <FriendsWrapper>
             <Slider {...settings}>
@@ -51,7 +54,7 @@ const MyPage = () => {
                   <CardSection key={friend.id}>
                     {friend.id === 1 ? (
                       <AddFriendCard>
-                        <AddBtn src={addBtn} onClick={navigateToFriendsList} />
+                        <AddBtn src={addBtn} onClick={navigateToCreateFriend} />
                       </AddFriendCard>
                     ) : (
                       <FriendCard>
