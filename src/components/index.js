@@ -5,4 +5,6 @@ import Dropdown from './Dropdown';
 import FriendCard from './FriendCard';
 import DropdownExtended from './DropdownExtended';
 import DropDownItemsLinked from './DropDownItemsLinked';
-export { TopBar, BottomNav,DropdownItems, Dropdown, DropdownExtended, DropDownItemsLinked, FriendCard }
+import ProgressBubbles from './ProgressBubbles';
+import BoardingImgComp from './BoardingImgComp';
+export { TopBar, BottomNav,DropdownItems, Dropdown, DropdownExtended, DropDownItemsLinked, FriendCard, ProgressBubbles, BoardingImgComp }
