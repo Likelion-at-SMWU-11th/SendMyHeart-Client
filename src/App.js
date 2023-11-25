@@ -8,6 +8,8 @@ import Copy from './pages/Copy';
 import Login from './pages/Login';
 import FindAccount from './pages/FindAccount';
 import Schedule from './pages/Schedule';
+import MyPage from './pages/MyPage';
+import FriendsList from './pages/FriendsList';
 
 function App() {
   return (
@@ -21,6 +23,11 @@ function App() {
         <Route path="profile" element={<Profile />} />
         <Route path="find" element={<FindAccount />} />
         <Route path="schedule" element={<Schedule />} />
+        <Route path="send" element={<Send />} />
+        <Route path="category" element={<ChangeCategory />} />
+        <Route path="copy" element={<Copy />} />
+        <Route path="mypage" element={<MyPage />} />
+        <Route path="friendslist" element={<FriendsList />} />
       </Routes>
     </div>
   );
