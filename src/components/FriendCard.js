@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
 // import profile from '../assets/profile.png';
 
 const FriendCard = ({imgSrc, name}) => {
+
+  const [isImgLoaded, setIsImgLoaded]=useState(false);
+
   return (
     <CardContainer className='card-container'>
       <ImgContainer>
-          <img src={imgSrc} id='blurred'/>
-          <img src={imgSrc} id='unblurred'/>
+          <img src={imgSrc} id='blurred' onLoad={()=>{setIsImgLoaded(true)}}/>
+          <img src={imgSrc} id='unblurred' onLoad={()=>{setIsImgLoaded(true)}}/>
+          {isImgLoaded ? (console.log('Image is loaded')):(console.log('Image is unloaded'))}
       </ImgContainer>
       <p><strong>{name}</strong></p>
     </CardContainer>

@@ -1,5 +1,5 @@
 import React ,{useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { BoardingImgComp, ProgressBubbles } from '../components';
 
@@ -13,9 +13,11 @@ const OnBoarding = () => {
     console.log('index:', index);
   }
 
+  const navigator=useNavigate();
   const goSignUp=()=>{
-
+    navigator('/register');
   }
+
   return (
     <div className='container' style={{
       padding: '3.12rem 0', 
@@ -35,7 +37,7 @@ const OnBoarding = () => {
           <YellowBtn onClick={handleOnClick}>다음으로</YellowBtn>
         ): (
           <div style={{width: '100%', textAlign:'center'}}>
-            <YellowBtn onClick={goSignUp}><Link to='/register'>시작하기</Link></YellowBtn>
+            <YellowBtn onClick={goSignUp}>시작하기</YellowBtn>
             <p style={{color: '#5F3D00', fontSize:'0.9rem'}}>이미 계정이 있으시다면? &nbsp;
               <Link to='/login' style={{color:'#FFCC70', fontWeight:'700'}}>로그인</Link>
             </p>

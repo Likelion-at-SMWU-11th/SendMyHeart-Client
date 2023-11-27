@@ -9,7 +9,6 @@ const ChangeCategory = () => {
 
   const location = useLocation();
   const friendName=location.state.friendName;
-  const username=location.state.username;
 
   const [category, setCategory]=useState('today'); 
   const [categoryKR, setCategoryKR]=useState('오늘의 안부');
@@ -55,7 +54,7 @@ const ChangeCategory = () => {
       </TopBar>
       <div className='content-div' style={{padding: "2rem 1.25rem"}}>
       {data.map((item, index) => (
-        <ItemBox key={index} to={'/copy'} state={{ friendName: friendName, category: categoryKR, text: item.content, username:username }}>
+        <ItemBox key={index} to={'/copy'} state={{ friendName: friendName, category: categoryKR, text: item.content}}>
           {item.is_recommended && <RecommendBox>추천</RecommendBox>}
           {item.content}
         </ItemBox>

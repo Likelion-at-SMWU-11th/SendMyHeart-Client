@@ -1,35 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { BottomNav, FriendCard, TopBar } from '../components';
 import logo from '../assets/logo.svg';
 import { styled } from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import profile from '../assets/profile.png';
+import { UserContext } from '../App';
 
 const Send = () => {
 
-  const location=useLocation();
-  let userInfo={
-    username: location.state.username,
-    id: location.state.userId
-  }
+  const {user,setUser}=useContext(UserContext);
 
   const baseURL = 'http://127.0.0.1:8000/';
   const [friends, setFriends]=useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
 
     const fetchFriendsData=async ()=>{
       try {
-        const response = await axios.get(`${baseURL}mypage/receiver/all/${userInfo.id}/`);
+        const response = await axios.get(`${baseURL}mypage/receiver/all/${user.userId}/`);
         setFriends(response.data);
+        
       } catch (err) {
         console.error('안부친구 데이터 불러오기 실패:', err);
+      } finally {
+        setLoading(false); // Set loading to false after fetching data
       }
     };
-    console.log(userInfo);
+    
     fetchFriendsData();
-  }, []);
+    
+  }, [user]);
+
+  // Render loading state if data is still being fetched
+  if (loading) {
+    return <p>Loading...</p>
+  }
 
   return (
     <div className="container">
@@ -41,9 +47,12 @@ const Send = () => {
             style={{color:'#000',fontWeight:'500', fontSize:'1.438rem'}}>누구에게 보내는 안부인가요?</p>
           <RowDiv>
               {friends.map((item,index)=>(
-                <Link to={'/category'} state={{friendName: item.nickname, username:userInfo.username}} key={index}>
+                item.image && (
+                <Link to={'/category'} key={index} state={{friendName:item.nickname }}>
+                  {console.log('imgSrc:', item.image)}
                   <FriendCard imgSrc={item.image} name={item.nickname}/>
                 </Link>
+              )
               ))}
               {/* <Link to={'/category'} state={{friendName:'grandma', username:userInfo.username}}>
                   <FriendCard imgSrc={profile} name='외할머니'/>
