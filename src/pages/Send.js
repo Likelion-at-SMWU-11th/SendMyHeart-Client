@@ -8,7 +8,7 @@ import { UserContext } from '../App';
 
 const Send = () => {
 
-  const {user,setUser}=useContext(UserContext);
+  const {user,receiver, setReceiver}=useContext(UserContext);
 
   const baseURL = 'http://127.0.0.1:8000/';
   const [friends, setFriends]=useState([]);
@@ -27,7 +27,7 @@ const Send = () => {
         setLoading(false); // Set loading to false after fetching data
       }
     };
-    
+    console.log(user);
     fetchFriendsData();
     
   }, [user]);
@@ -48,7 +48,7 @@ const Send = () => {
           <RowDiv>
               {friends.map((item,index)=>(
                 item.image && (
-                <Link to={'/category'} key={index} state={{friendName:item.nickname }}>
+                <Link to={'/category'} key={index}>
                   {console.log('imgSrc:', item.image)}
                   <FriendCard imgSrc={item.image} name={item.nickname}/>
                 </Link>

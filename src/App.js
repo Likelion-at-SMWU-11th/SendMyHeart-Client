@@ -10,15 +10,15 @@ import FindAccount from './pages/FindAccount';
 import Schedule from './pages/Schedule';
 import OnBoarding from './pages/OnBoarding';
 import Splash from './pages/Splash';
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useState } from 'react';
 
 export const UserContext=createContext();
 
 function App() {
   const [user, setUser] = useState({ userId: '', userName: '' });
-  
+  const [receiver, setReceiver]=useState('')
   return (
-      <UserContext.Provider value={{user, setUser}}>
+      <UserContext.Provider value={{user, setUser, receiver, setReceiver}}>
       <div className="App">
         <Routes>
           <Route path="send" element={<Send />} />
