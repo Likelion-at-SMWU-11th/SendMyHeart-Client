@@ -2,25 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { BottomNav, FriendCard, TopBar } from '../components';
 import logo from '../assets/logo.svg';
 import { styled } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import profile from '../assets/profile.png';
 
 const Send = () => {
-  const baseURL = 'http://127.0.0.1:8000/';
-  const [data, setData] = useState([]);
 
+  const location=useLocation();
+  let userInfo={
+    username: location.state.username,
+    id: location.state.userId
+  }
+
+  const baseURL = 'http://127.0.0.1:8000/';
+  const [friends, setFriends]=useState([]);
 
   useEffect(()=>{
-    const fetchData=async ()=>{
+
+    const fetchFriendsData=async ()=>{
       try {
-        const response = await axios.get(`${baseURL}mypage/receiver/all/`);
-        setData(response.data);
+        const response = await axios.get(`${baseURL}mypage/receiver/all/${userInfo.id}/`);
+        setFriends(response.data);
       } catch (err) {
         console.error('안부친구 데이터 불러오기 실패:', err);
       }
     };
-    fetchData();
+    console.log(userInfo);
+    fetchFriendsData();
   }, []);
 
   return (
@@ -32,14 +40,14 @@ const Send = () => {
           <p 
             style={{color:'#000',fontWeight:'500', fontSize:'1.438rem'}}>누구에게 보내는 안부인가요?</p>
           <RowDiv>
-              {data.map((item,index)=>(
-                <Link to={'/category'} state={{friendName: item.nickname}} key={index}>
+              {friends.map((item,index)=>(
+                <Link to={'/category'} state={{friendName: item.nickname, username:userInfo.username}} key={index}>
                   <FriendCard imgSrc={item.image} name={item.nickname}/>
                 </Link>
               ))}
-              <Link to={'/category'} state={{friendName:'grandma'}}>
+              {/* <Link to={'/category'} state={{friendName:'grandma', username:userInfo.username}}>
                   <FriendCard imgSrc={profile} name='외할머니'/>
-              </Link>
+              </Link> */}
           </RowDiv>
           <Link to='/' style={{color:'#FFCC70'}}>안부친구 추가하기</Link>
       </div>

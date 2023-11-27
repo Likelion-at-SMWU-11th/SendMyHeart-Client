@@ -127,7 +127,7 @@ const Login = () => {
           console.log('=================', '로그인 성공');
         }
         console.log(UserInfo);
-        navigate(`/send`); //메인 페이지로 이동
+        navigate('/send', {state:{username:res.data.user.username, userId:res.data.user.id}}); //메인 페이지로 이동
       })
       .catch((err) => {
         console.log(err);

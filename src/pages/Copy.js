@@ -7,9 +7,8 @@ import { styled } from 'styled-components';
 const Copy = () => {
   
   const location=useLocation();
-  const userName='선아';
 
-  const dataText=`${location.state.friendName} 저 ${userName}예요~\n${location.state.text}`;
+  const dataText=`${location.state.friendName} 저 ${location.state.username}예요~\n${location.state.text}`;
 
   const handleCopyBtnClick=()=>{
     const txtarea=document.getElementById('txtArea');
