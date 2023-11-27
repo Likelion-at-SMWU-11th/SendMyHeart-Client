@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Button from './../components/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import logo from '../assets/header.png';
+import { UserContext } from '../App';
 
 const Wrapper = styled.div`
   background-color: #efefef;
@@ -61,6 +62,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
 
   /* 유효성 검사 */
   const [isEmail, setIsEmail] = useState(false);
@@ -101,7 +103,7 @@ const Login = () => {
     } else if (!isPassword) {
       return alert('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.');
     }
-
+ 
     let UserInfo = {
       email: email,
       password: password,
@@ -125,9 +127,11 @@ const Login = () => {
           alert('입력하신 비밀번호가 일치하지 않습니다.');
         } else if (res.data.user.email === UserInfo.email) {
           console.log('=================', '로그인 성공');
+          setUser({userId:res.data.user.id, userName:res.data.user.username});
+
         }
         console.log(UserInfo);
-        navigate('/send', {state:{username:res.data.user.username, userId:res.data.user.id}}); //메인 페이지로 이동
+        navigate('/send'); //메인 페이지로 이동
       })
       .catch((err) => {
         console.log(err);

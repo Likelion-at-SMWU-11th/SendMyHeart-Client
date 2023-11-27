@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { TopBar, BottomNav, DropdownExtended, Dropdown } from '../components';
 import logo from '../assets/logo.svg';
 import { styled } from 'styled-components';
+import { UserContext } from '../App';
 
 const Copy = () => {
   
   const location=useLocation();
+  const {user, setUser}=useContext(UserContext);
 
-  const dataText=`${location.state.friendName} 저 ${location.state.username}예요~\n${location.state.text}`;
+  const dataText=`${location.state.friendName} 저 ${user.userName}예요~\n${location.state.text}`;
 
   const handleCopyBtnClick=()=>{
     const txtarea=document.getElementById('txtArea');
