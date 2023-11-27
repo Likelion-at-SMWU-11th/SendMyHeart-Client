@@ -4,16 +4,17 @@ import Button from './../components/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import logo from '../assets/header.png';
+import logo from '../assets/logo.svg';
 import { UserContext } from '../App';
+import { TopBar } from '../components';
 
 const Wrapper = styled.div`
   background-color: #efefef;
-  width: 100vw;
+  // width: 100vw;
   align-items: center;
   text-align: center;
-  overflow-x: hidden;
-  padding-bottom: 200px;
+  // overflow-x: hidden;
+  // padding-bottom: 200px;
 `;
 
 const Logo = styled.img`
@@ -24,18 +25,20 @@ const Logo = styled.img`
 const Txt = styled.div`
   font-size: 20px;
   font-weight: 600;
-  padding: 5vh 5vw 3vh;
+  padding: 5vh 0 3vh;
   text-align: left;
+  width: 100%;
 `;
 
 const SignInput = styled.input`
   height: 45px;
-  width: 350px;
-  //margin-bottom: 1vh;
+  // width: 350px;
+  margin-bottom: 1vh;
   border-radius: 5px;
   border-width: 1px;
   border-style: solid;
   border-color: #cecece;
+  width: 100%;
 `;
 
 const Info = styled.div`
@@ -43,18 +46,19 @@ const Info = styled.div`
   font-size: 12px;
   align-items: center;
   text-align: center;
-  margin-left: 20vw;
-  float: left;
+  // margin-left: 20vw;
+  // float: left;
 `;
 
 const SetPwd = styled.div`
   font-weight: 500;
   font-size: 12px;
   color: #ffcc70;
-  margin-left: 2vw;
-  float: right;
+  margin-left: 0.5vw;
+  // float: right;
   text-decoration: underline;
   cursor: pointer;
+  display: inline;
 `;
 
 const Login = () => {
@@ -93,7 +97,7 @@ const Login = () => {
   };
 
   const goToPwdResetPage = () => {
-    navigate('/'); //다음 페이지
+    navigate('/find'); //다음 페이지
   };
 
   const onSubmit = (event) => {
@@ -140,31 +144,36 @@ const Login = () => {
   };
 
   return (
-    <Wrapper>
-      <Logo src={logo} />
-      <Txt>
-        안녕하세요! <br /> 가입한 이메일로 로그인해 주세요.
-      </Txt>
-      <SignInput
-        id="email"
-        name="email"
-        value={email}
-        onChange={onChangeEmail}
-        type="email"
-        placeholder="   이메일 입력"
-      />
-      <SignInput
-        id="password"
-        name="password"
-        value={password}
-        onChange={onChangePassword}
-        placeholder="   비밀번호 입력"
-      />
-      <Button title="로그인" onClick={onSubmit} />
-      <Info>
-        비밀번호를 잊어버리셨나요?{' '}
-        <SetPwd onClick={goToPwdResetPage}>비밀번호 재설정</SetPwd>
-      </Info>
+    <Wrapper className='container'>
+      {/* <Logo src={logo} /> */}
+      <TopBar>
+        <img src={logo}/>
+      </TopBar>
+      <div className='content-div' style={{justifyContent:'flex-start'}}>
+        <Txt>
+          안녕하세요! <br /> 가입한 이메일로 로그인해 주세요.
+        </Txt>
+        <SignInput
+          id="email"
+          name="email"
+          value={email}
+          onChange={onChangeEmail}
+          type="email"
+          placeholder="   이메일 입력"
+        />
+        <SignInput
+          id="password"
+          name="password"
+          value={password}
+          onChange={onChangePassword}
+          placeholder="   비밀번호 입력"
+        />
+        <Button title="로그인" onClick={onSubmit} />
+        <Info>
+          비밀번호를 잊어버리셨나요?{' '}
+          <SetPwd onClick={goToPwdResetPage}>비밀번호 재설정</SetPwd>
+        </Info>
+      </div>
     </Wrapper>
   );
 };

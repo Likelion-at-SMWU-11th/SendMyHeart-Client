@@ -4,16 +4,17 @@ import Button from './../components/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import logo from '../assets/header.png';
+import logo from '../assets/logo.svg';
 import Profile from './Profile';
+import { TopBar } from '../components';
 
 const Wrapper = styled.div`
   background-color: #efefef;
-  width: 100vw;
+  // width: 100vw;
   align-items: center;
   text-align: center;
-  overflow-x: hidden;
-  padding-bottom: 200px;
+  // overflow-x: hidden;
+  // padding-bottom: 200px;
 `;
 
 const Logo = styled.img`
@@ -22,10 +23,10 @@ const Logo = styled.img`
 `;
 
 const Txt = styled.div`
-  font-size: 20px;
-  font-weight: 600;
-  padding: 5vh 5vw 3vh;
-  text-align: left;
+font-size: 20px;
+font-weight: 600;
+padding: 5vh 5vw 3vh;
+text-align: left;
 `;
 
 const SignTxt = styled.div`
@@ -192,87 +193,92 @@ const RegisterPage = () => {
   };
 
   return (
-    <Wrapper>
-      <form>
-        <Logo src={logo} />
-        <Txt>
-          안녕하세요! <br /> 이메일로 회원가입해 주세요.
-        </Txt>
-        <div>
-          <SignTxt>이메일</SignTxt>
-          <SignInput
-            id="email"
-            name="email"
-            onChange={onChangeEmail}
-            type="email"
-            placeholder="   예) sendmyheart@gmail.com"
-          />
-          <SignTxt>비밀번호</SignTxt>
-          <SignInput
-            id="password"
-            name="password"
-            value={password}
-            onChange={onChangePassword}
-            placeholder="   영문/숫자/특수문자 혼합 8~20자"
-          />
-          <SignInput
-            id="password2"
-            name="password2"
-            value={password2}
-            onChange={onChangePassword2}
-            placeholder="   비밀번호를 한 번 더 입력해 주세요."
-          />
-          <SignTxt>연락처</SignTxt>``
-          <SignInput
-            id="contact"
-            name="contact"
-            value={contact}
-            onChange={onChangeContact}
-            placeholder="   '-'를 제외한 숫자만 입력해 주세요."
-          />
-          <CheckRadioTitle>
-            <input
-              type="checkbox"
-              name="agreementAll"
-              checked={agreedAll}
-              onChange={handleAllAgreement}
+    <Wrapper className='container'>
+      <TopBar>
+        <img src={logo}/>
+      </TopBar>
+      <div className='content-div'>
+        <form>
+          {/* <Logo src={logo} /> */}
+          <Txt>
+            안녕하세요! <br /> 이메일로 회원가입해 주세요.
+          </Txt>
+          <div>
+            <SignTxt>이메일</SignTxt>
+            <SignInput
+              id="email"
+              name="email"
+              onChange={onChangeEmail}
+              type="email"
+              placeholder="   예) sendmyheart@gmail.com"
             />
-            약관 전체 동의
-          </CheckRadioTitle>
-          <hr />
-          <CheckRadio>
-            <input
-              type="checkbox"
-              name="ageAgreed"
-              checked={agreements.ageAgreed}
-              onChange={handleAgreement}
-              required
+            <SignTxt>비밀번호</SignTxt>
+            <SignInput
+              id="password"
+              name="password"
+              value={password}
+              onChange={onChangePassword}
+              placeholder="   영문/숫자/특수문자 혼합 8~20자"
             />
-            (필수) 본인은 만 14세 이상입니다.
-          </CheckRadio>
-          <CheckRadio>
-            <input
-              type="checkbox"
-              name="serviceAgreed"
-              checked={agreements.serviceAgreed}
-              onChange={handleAgreement}
-              required
+            <SignInput
+              id="password2"
+              name="password2"
+              value={password2}
+              onChange={onChangePassword2}
+              placeholder="   비밀번호를 한 번 더 입력해 주세요."
             />
-            (필수) 서비스 이용약관 동의
-          </CheckRadio>
-          <CheckRadio>
-            <input
-              type="checkbox"
-              name="personalInfoAgreed"
-              checked={agreements.personalInfoAgreed}
-              onChange={handleAgreement}
-              required
+            <SignTxt>연락처</SignTxt> {/*``*/}
+            <SignInput
+              id="contact"
+              name="contact"
+              value={contact}
+              onChange={onChangeContact}
+              placeholder="   '-'를 제외한 숫자만 입력해 주세요."
             />
-            (필수) 개인정보 수집 및 이용 동의
-          </CheckRadio>
-          <Button title="동의하고 가입하기" onClick={onSubmit} />
-        </div>
-      </form>
+            <CheckRadioTitle>
+              <input
+                type="checkbox"
+                name="agreementAll"
+                checked={agreedAll}
+                onChange={handleAllAgreement}
+              />
+              약관 전체 동의
+            </CheckRadioTitle>
+            <hr />
+            <CheckRadio>
+              <input
+                type="checkbox"
+                name="ageAgreed"
+                checked={agreements.ageAgreed}
+                onChange={handleAgreement}
+                required
+              />
+              (필수) 본인은 만 14세 이상입니다.
+            </CheckRadio>
+            <CheckRadio>
+              <input
+                type="checkbox"
+                name="serviceAgreed"
+                checked={agreements.serviceAgreed}
+                onChange={handleAgreement}
+                required
+              />
+              (필수) 서비스 이용약관 동의
+            </CheckRadio>
+            <CheckRadio>
+              <input
+                type="checkbox"
+                name="personalInfoAgreed"
+                checked={agreements.personalInfoAgreed}
+                onChange={handleAgreement}
+                required
+              />
+              (필수) 개인정보 수집 및 이용 동의
+            </CheckRadio>
+            <Button title="동의하고 가입하기" onClick={onSubmit} />
+          </div>
+        </form>
+      </div>
     </Wrapper>
   );
 };

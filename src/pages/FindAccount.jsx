@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.div`
   background-color: #efefef;
-  width: 100vw;
+  // width: 100vw;
   align-items: center;
   text-align: center;
-  overflow-x: hidden;
-  padding-bottom: 200px;
+  // overflow-x: hidden;
+  // padding-bottom: 200px;
 `;
 
 const Menu = styled.div`
@@ -24,16 +24,18 @@ const Txt = styled.div`
   font-weight: 600;
   padding: 5vh 5vw 3vh;
   text-align: left;
+  width: 100%;
 `;
 
 const SignInput = styled.input`
   height: 45px;
-  width: 350px;
+  // width: 350px;
   //margin-bottom: 1vh;
   border-radius: 5px;
   border-width: 1px;
   border-style: solid;
   border-color: #cecece;
+  width: 100%;
 `;
 
 const FindAccount = () => {
@@ -63,24 +65,26 @@ const FindAccount = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper className='container'>
       <TopBar>
         <Menu>이메일로 계정 찾기</Menu>
       </TopBar>
-      <Txt>
-        회원가입 시 등록한
-        <br />
-        이메일 주소를 입력해 주세요.
-      </Txt>
-      <SignInput
-        id="email"
-        name="email"
-        value={email}
-        onChange={onChangeEmail}
-        type="email"
-        placeholder="   예) sendmyheart@gmail.com"
-      />
-      <Button title="비밀번호 재설정" onClick={onSubmit} />
+      <div className='content-div' style={{justifyContent:'flex-start', width: '350px'}}>
+        <Txt>
+          회원가입 시 등록한
+          <br />
+          이메일 주소를 입력해 주세요.
+        </Txt>
+        <SignInput
+          id="email"
+          name="email"
+          value={email}
+          onChange={onChangeEmail}
+          type="email"
+          placeholder="   예) sendmyheart@gmail.com"
+        />
+        <Button title="비밀번호 재설정" onClick={onSubmit} />
+      </div>
     </Wrapper>
   );
 };

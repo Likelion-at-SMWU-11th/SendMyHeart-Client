@@ -4,17 +4,18 @@ import Button from './../components/Button';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-import logo from '../assets/header.png';
+import logo from '../assets/logo.svg';
 import profile from '../assets/defaultprofile.png';
 import edit from '../assets/profileedit.png';
+import { TopBar } from '../components';
 
 const Wrapper = styled.div`
   background-color: #efefef;
-  width: 100vw;
+  // width: 100vw;
   align-items: center;
   text-align: center;
-  overflow-x: hidden;
-  padding-bottom: 200px;
+  // overflow-x: hidden;
+  // padding-bottom: 200px;
 `;
 
 const Logo = styled.img`
@@ -27,6 +28,7 @@ const Txt = styled.div`
   font-weight: 600;
   padding: 5vh 5vw 3vh;
   text-align: left;
+  width: 100%;
 `;
 
 const DefaultProfile = styled.img`
@@ -37,8 +39,10 @@ const DefaultProfile = styled.img`
 
 const EditProfile = styled.div`
   position: absolute;
-  top: 26vh;
-  left: 57vw;
+  // top: 26vh;
+  // left: 57vw;
+  top: 10.1rem;
+  left:12.5rem;
 `;
 
 const SignTxt = styled.div`
@@ -47,6 +51,7 @@ const SignTxt = styled.div`
   font-weight: 600;
   padding: 1vh 5vw 1vh;
   text-align: left;
+  width: 100%;
 `;
 
 const SignInput = styled.input`
@@ -178,38 +183,43 @@ const Profile = () => {
   };
 
   return (
-    <Wrapper>
-      <Logo src={logo} />
-      <Txt>프로필을 설정해주세요.</Txt>
-      {uploadedImage ? (
-        <DefaultProfile src={URL.createObjectURL(uploadedImage)} />
-      ) : (
-        <DefaultProfile src={profile} alt="프로필 없을 때"></DefaultProfile>
-      )}
-      <EditProfile>
-        <label htmlFor="file">
-          <img src={edit} style={{ height: '25px', width: '25px' }} />
-        </label>
-        <input
-          type="file"
-          id="file"
-          accept="image/*"
-          onChange={onChangeImage}
-          style={{ display: 'none' }}
+    <Wrapper className='container'>
+      {/* <Logo src={logo} /> */}
+      <TopBar>
+        <img src={logo}/>
+      </TopBar>
+      <div className='content-div' style={{justifyContent:'flex-start', position:'relative'}}>
+        <Txt>프로필을 설정해주세요.</Txt>
+        {uploadedImage ? (
+          <DefaultProfile src={URL.createObjectURL(uploadedImage)} />
+        ) : (
+          <DefaultProfile src={profile} alt="프로필 없을 때"></DefaultProfile>
+        )}
+        <EditProfile>
+          <label htmlFor="file">
+            <img src={edit} style={{ height: '25px', width: '25px' }} />
+          </label>
+          <input
+            type="file"
+            id="file"
+            accept="image/*"
+            onChange={onChangeImage}
+            style={{ display: 'none' }}
+          />
+        </EditProfile>
+        
+        <SignTxt>닉네임</SignTxt>
+        <SignInput
+          id="username"
+          name="username"
+          value={username}
+          onChange={onChangeName}
+          type="text"
+          placeholder="   닉네임을 입력해주세요."
         />
-      </EditProfile>
-
-      <SignTxt>닉네임</SignTxt>
-      <SignInput
-        id="username"
-        name="username"
-        value={username}
-        onChange={onChangeName}
-        type="text"
-        placeholder="   닉네임을 입력해주세요."
-      />
-
-      <Button title="다음으로" onClick={onSubmit} />
+        
+        <Button title="다음으로" onClick={onSubmit} />
+      </div>
     </Wrapper>
   );
 };
