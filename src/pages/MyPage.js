@@ -19,6 +19,10 @@ const MyPage = () => {
     navigate('friendslist');
   };
 
+  const navigateToEdit = () => {
+    navigate('edit');
+  };
+
   const settings = {
     dots: false,
     infinite: false,
@@ -38,7 +42,7 @@ const MyPage = () => {
           <ProfileWrapper>
             <img src={profile} />
             <h3>사자</h3>
-            <button>프로필 수정</button>
+            <button onClick={navigateToEdit}>프로필 수정</button>
           </ProfileWrapper>
         </ProfileSection>
         <FriendsSection>
