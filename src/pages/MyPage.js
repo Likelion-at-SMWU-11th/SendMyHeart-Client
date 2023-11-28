@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import styled from 'styled-components';
 import { BottomNav, TopBar } from '../components';
 import logo from '../assets/logo.svg';
@@ -9,6 +9,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import dummy from '../dummy.json';
 import addBtn from '../assets/add_btn.svg';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../App';
+import axios from 'axios';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ const MyPage = () => {
     navigate('createfriend');
   };
   const navigateToFriendsList = () => {
-    navigate('friendslist');
+    navigate('friendslist',{ state: { friends } });
   };
 
   const settings = {
@@ -26,6 +28,20 @@ const MyPage = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
   };
+
+  const {user}=useContext(UserContext);
+  const [friends, setFriends]=useState([]);
+  useEffect(()=>{
+    const fetchData=async()=>{
+      try {
+        const response=await axios.get(`http://127.0.0.1:8000/mypage/receiver/all/${user.userId}/`);
+        setFriends(response.data);
+      } catch(err){
+        console.error('프로필 데이터 불러오기 실패:',err);
+      }
+    }
+    fetchData();
+  },[user])
 
   return (
     <Container className="container">
@@ -37,7 +53,7 @@ const MyPage = () => {
           <h4>내 프로필</h4>
           <ProfileWrapper>
             <img src={profile} />
-            <h3>사자</h3>
+            <h3>{user.userName}</h3>
             <button>프로필 수정</button>
           </ProfileWrapper>
         </ProfileSection>
@@ -48,7 +64,10 @@ const MyPage = () => {
           </FriendsHeader>
           <FriendsWrapper>
             <Slider {...settings}>
-              {dummy.friends.map((friend) => {
+              <AddFriendCard>
+                <AddBtn src={addBtn} onClick={navigateToCreateFriend} />
+              </AddFriendCard>
+              {friends.map((friend) => {
                 console.log(friend.id);
                 return (
                   <CardSection key={friend.id}>
@@ -58,9 +77,10 @@ const MyPage = () => {
                       </AddFriendCard>
                     ) : (
                       <FriendCard>
-                        <img src={friend.profile} />
-                        <p>{friend.name}</p>
+                        <img src={friend.image} />
+                        <p>{friend.nickname}</p>
                       </FriendCard>
+                      // <FriendCard imgSrc={friend.image} name={friend.nickname}/>
                     )}
                   </CardSection>
                 );
@@ -88,9 +108,9 @@ export default MyPage;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  .wrapper {
-    margin-top: 35px;
-  }
+  // .wrapper {
+  //   margin-top: 35px;
+  // }
 `;
 
 const ProfileSection = styled.div`

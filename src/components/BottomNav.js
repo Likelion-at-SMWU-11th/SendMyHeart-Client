@@ -17,7 +17,7 @@ const BottomNav = () => {
       <Link to="/send">
         <img src={centerbtn}/>
       </Link>
-      <Link to="/profile">
+      <Link to="/mypage">
         <SideNav>
           <img src={mypage}/>
           <p>내 정보</p>

@@ -18,7 +18,7 @@ import CreateFriend from './pages/CreateFriend';
 export const UserContext=createContext();
 
 function App() {
-  const [user, setUser] = useState({ userId: '', userName: '' });
+  const [user, setUser] = useState({ userId: '', userName: '', profile:'' });
   const [receiver, setReceiver]=useState('')
   return (
       <UserContext.Provider value={{user, setUser, receiver, setReceiver}}>

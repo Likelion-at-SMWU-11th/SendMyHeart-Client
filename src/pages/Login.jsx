@@ -131,7 +131,7 @@ const Login = () => {
           alert('입력하신 비밀번호가 일치하지 않습니다.');
         } else if (res.data.user.email === UserInfo.email) {
           console.log('=================', '로그인 성공');
-          setUser({userId:res.data.user.id, userName:res.data.user.username});
+          setUser({userId:res.data.user.id, userName:res.data.user.username, profile:res.data.user.profile_image});
 
         }
         console.log(UserInfo);
