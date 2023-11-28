@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const BottomNav = () => {
   return (
     <Container>
-      <Link to="/">
+      <Link to="/schedule">
         <SideNav>
           <img src={calender}/>
           <p>달력</p>
@@ -17,7 +17,7 @@ const BottomNav = () => {
       <Link to="/send">
         <img src={centerbtn}/>
       </Link>
-      <Link to="/">
+      <Link to="/profile">
         <SideNav>
           <img src={mypage}/>
           <p>내 정보</p>

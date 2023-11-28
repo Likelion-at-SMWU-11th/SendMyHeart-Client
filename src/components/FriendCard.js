@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { styled } from 'styled-components';
+import { UserContext } from '../App';
 // import profile from '../assets/profile.png';
 
 const FriendCard = ({imgSrc, name}) => {
+
+  const [isImgLoaded, setIsImgLoaded]=useState(false);
+  const {receiver, setReceiver}=useContext(UserContext);
+
   return (
-    <CardContainer className='card-container'>
+    <CardContainer className='card-container' onClick={()=>{setReceiver(name);}}>
       <ImgContainer>
-          <img src={imgSrc} id='blurred'/>
-          <img src={imgSrc} id='unblurred'/>
+          <img src={imgSrc} id='blurred' onLoad={()=>{setIsImgLoaded(true)}}/>
+          <img src={imgSrc} id='unblurred' onLoad={()=>{setIsImgLoaded(true)}}/>
+          {isImgLoaded ? (console.log('Image is loaded')):(console.log('Image is unloaded'))}
       </ImgContainer>
       <p><strong>{name}</strong></p>
     </CardContainer>

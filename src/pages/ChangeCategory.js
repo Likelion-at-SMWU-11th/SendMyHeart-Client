@@ -6,36 +6,43 @@ import { Dropdown, TopBar } from '../components';
 
 
 const ChangeCategory = () => {
-
+  
   const location = useLocation();
-  const friendName=location.state.friendName;
+  const queryParams = new URLSearchParams(location.search);
 
-  const [category, setCategory]=useState('today'); 
-  const [categoryKR, setCategoryKR]=useState('오늘의 안부');
+  /* Use queryParams.get('category'), queryParams.get('categoryKR')
+  if it exists, otherwise use default value */
+  const [category, setCategory]=useState(queryParams.get('category') ||'today');
+
+  const handleCategory=(categoryEN)=>{
+    setCategory(categoryEN);
+    setCategoryKR(mapCategoryKR(categoryEN));
+  } 
+
+  const mapCategoryKR=(category)=>{
+    
+    const krMap = {
+      today: '오늘의 안부',
+      simple: '간단한 안부',
+      special: '특별한 안부',
+      cute: '귀여운 안부',
+    };
+    
+    return krMap[category] || category;
+  }
+
+  const [categoryKR, setCategoryKR]=useState(mapCategoryKR(category));
 
   const baseURL='http://127.0.0.1:8000/';
   const [data, setData]=useState([]);
 
-  const handleCategory=(categoryKR, categoryEN)=>{
-    setCategory(categoryEN);
-    setCategoryKR(categoryKR);
-  }
-
-
+  
   // GET api
   // re-fetch data when the category changes
   useEffect(()=>{
 
-    const getCategoryFromCopyPage=()=>{
-      setCategory(location.state.category);
-    }
-
     const fetchData=async ()=>{
       try {
-        if(location.state.category!==undefined){
-          getCategoryFromCopyPage();
-          // console.log('CategoryFromCopyPage:', category);
-        }
         const response=await axios.get(`${baseURL}main/message/${category}/`);
         setData(response.data.messages);
         console.log(response.data.messages);
@@ -44,18 +51,17 @@ const ChangeCategory = () => {
       }
     };
 
-    
     fetchData();
   },[category]);
   
   return (
     <div>
       <TopBar>
-        <Dropdown onChangeCategory={handleCategory} />
+        <Dropdown onChangeCategory={handleCategory} mapCategoryKR={mapCategoryKR}/>
       </TopBar>
       <div className='content-div' style={{padding: "2rem 1.25rem"}}>
       {data.map((item, index) => (
-        <ItemBox key={index} to={'/copy'} state={{ friendName: friendName, category: categoryKR, text: item.content }}>
+        <ItemBox key={index} to={'/copy'} state={{ category: categoryKR, text: item.content}}>
           {item.is_recommended && <RecommendBox>추천</RecommendBox>}
           {item.content}
         </ItemBox>
