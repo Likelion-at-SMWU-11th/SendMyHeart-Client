@@ -21,6 +21,10 @@ const MyPage = () => {
     navigate('friendslist',{ state: { friends } });
   };
 
+  const navigateToEdit = () => {
+    navigate('edit');
+  };
+
   const settings = {
     dots: false,
     infinite: false,
@@ -54,7 +58,7 @@ const MyPage = () => {
           <ProfileWrapper>
             <img src={profile} />
             <h3>{user.userName}</h3>
-            <button>프로필 수정</button>
+            <button onClick={navigateToEdit}>프로필 수정</button>
           </ProfileWrapper>
         </ProfileSection>
         <FriendsSection>

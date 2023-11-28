@@ -14,14 +14,15 @@ import { createContext, useState } from 'react';
 import MyPage from './pages/MyPage';
 import FriendsList from './pages/FriendsList';
 import CreateFriend from './pages/CreateFriend';
+import MyPageEdit from './pages/MyPageEdit';
 
-export const UserContext=createContext();
+export const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState({ userId: '', userName: '', profile:'' });
   const [receiver, setReceiver]=useState('')
   return (
-      <UserContext.Provider value={{user, setUser, receiver, setReceiver}}>
+    <UserContext.Provider value={{ user, setUser, receiver, setReceiver }}>
       <div className="App">
         <Routes>
           <Route path="send" element={<Send />} />
@@ -33,13 +34,14 @@ function App() {
           <Route path="find" element={<FindAccount />} />
           <Route path="schedule" element={<Schedule />} />
           <Route path="onboarding" element={<OnBoarding />} />
-          <Route path="/" element={<Splash/>} />
-        <Route path="mypage" element={<MyPage />} />
-        <Route path="mypage/friendslist" element={<FriendsList />} />
-        <Route path="mypage/createfriend" element={<CreateFriend />} />
+          <Route path="/" element={<Splash />} />
+          <Route path="mypage" element={<MyPage />} />
+          <Route path="mypage/friendslist" element={<FriendsList />} />
+          <Route path="mypage/createfriend" element={<CreateFriend />} />
+          <Route path="mypage/edit" element={<MyPageEdit />} />
         </Routes>
       </div>
-      </UserContext.Provider>
+    </UserContext.Provider>
   );
 }
 

@@ -10,16 +10,16 @@ const BottomNav = () => {
     <Container>
       <Link to="/schedule">
         <SideNav>
-          <img src={calender}/>
+          <img src={calender} />
           <p>달력</p>
         </SideNav>
       </Link>
       <Link to="/send">
-        <img src={centerbtn}/>
+        <img src={centerbtn} />
       </Link>
       <Link to="/mypage">
         <SideNav>
-          <img src={mypage}/>
+          <img src={mypage} />
           <p>내 정보</p>
         </SideNav>
       </Link>
@@ -27,7 +27,7 @@ const BottomNav = () => {
   );
 };
 
-const Container=styled.div`
+const Container = styled.div`
   width: 100%;
   height: 3.75rem;
   box-sizing: border-box;
@@ -37,7 +37,11 @@ const Container=styled.div`
   align-items: center;
   justify-content: space-around;
 
-  background: linear-gradient(180deg, rgba(253, 253, 253, 0.54) 0%, rgba(234, 234, 234, 0.90) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(253, 253, 253, 0.54) 0%,
+    rgba(234, 234, 234, 0.9) 100%
+  );
   box-shadow: 0px 4px 4px 0px rgba(225, 225, 225, 0.25);
 
   a {
@@ -46,10 +50,9 @@ const Container=styled.div`
   & > a {
     cursor: pointer;
   }
-  
-`
+`;
 
-const SideNav=styled.div`
+const SideNav = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,6 +64,6 @@ const SideNav=styled.div`
     font-weight: 500;
     margin-bottom: 0;
   }
-`
+`;
 
 export default BottomNav;
