@@ -4,13 +4,16 @@ import { BottomNav, TopBar } from '../components';
 import logo from '../assets/logo.svg';
 import dummy from '../dummy.json';
 import addBtn from '../assets/add_btn.svg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const FriendsList = () => {
   const navigate = useNavigate();
   const navigateToCreateFriend = () => {
     navigate('/mypage/createfriend');
   };
+
+  const location=useLocation();
+  const friends=location.state.friends || [];
 
   return (
     <Container className="container">
@@ -20,7 +23,10 @@ const FriendsList = () => {
       <h3>안부친구 명단</h3>
       <div className="wrapper">
         <FriendsWrapper>
-          {dummy.friends.map((friend) => (
+        <AddFriendCard>
+                  <AddBtn src={addBtn} onClick={navigateToCreateFriend} />
+                </AddFriendCard>
+          {friends.map((friend) => (
             <CardSection key={friend.id}>
               {friend.id === 1 ? (
                 <AddFriendCard>
@@ -28,8 +34,8 @@ const FriendsList = () => {
                 </AddFriendCard>
               ) : (
                 <FriendCard>
-                  <img src={friend.profile} />
-                  <p>{friend.name}</p>
+                  <img src={friend.image} />
+                  <p>{friend.nickname}</p>
                 </FriendCard>
               )}
             </CardSection>

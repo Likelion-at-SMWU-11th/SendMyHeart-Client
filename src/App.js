@@ -19,8 +19,8 @@ import MyPageEdit from './pages/MyPageEdit';
 export const UserContext = createContext();
 
 function App() {
-  const [user, setUser] = useState({ userId: '', userName: '' });
-  const [receiver, setReceiver] = useState('');
+  const [user, setUser] = useState({ userId: '', userName: '', profile:'' });
+  const [receiver, setReceiver]=useState('')
   return (
     <UserContext.Provider value={{ user, setUser, receiver, setReceiver }}>
       <div className="App">
