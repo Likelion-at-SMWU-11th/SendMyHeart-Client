@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import ChangeCategory from './pages/ChangeCategory';
 import Register from './pages/Register';
@@ -11,6 +11,9 @@ import Schedule from './pages/Schedule';
 import OnBoarding from './pages/OnBoarding';
 import Splash from './pages/Splash';
 import { createContext, useState } from 'react';
+import MyPage from './pages/MyPage';
+import FriendsList from './pages/FriendsList';
+import CreateFriend from './pages/CreateFriend';
 
 export const UserContext=createContext();
 
@@ -31,10 +34,12 @@ function App() {
           <Route path="schedule" element={<Schedule />} />
           <Route path="onboarding" element={<OnBoarding />} />
           <Route path="/" element={<Splash/>} />
+        <Route path="mypage" element={<MyPage />} />
+        <Route path="mypage/friendslist" element={<FriendsList />} />
+        <Route path="mypage/createfriend" element={<CreateFriend />} />
         </Routes>
       </div>
       </UserContext.Provider>
-    
   );
 }
 
